@@ -11,7 +11,8 @@ import SwiftUI
 struct UserManagementApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let viewmodel = PersonViewModel(service: DataService())
+            PeopleView(viewmodel: viewmodel)
         }
     }
 }
