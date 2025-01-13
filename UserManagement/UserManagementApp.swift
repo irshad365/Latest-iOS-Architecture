@@ -10,12 +10,18 @@ import People
 
 @main
 struct UserManagementApp: App {
-    @State private var viewmodel = PersonViewModel(service: DataService())
-
     var body: some Scene {
         WindowGroup {
-            PeopleView()
-                .environment(viewmodel)
+            ContentView()
+                .environment(\.dataService, DataService())
         }
+    }
+}
+
+struct ContentView: View {
+    @Environment(\.dataService) private var dataService
+
+    var body: some View {
+        PeopleView(dataService: dataService)
     }
 }

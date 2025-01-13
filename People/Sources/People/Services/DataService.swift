@@ -6,6 +6,12 @@
 //
 
 import Foundation
+import SwiftUICore
+
+
+public extension EnvironmentValues {
+    @Entry var dataService: DataServiceProtocol = DataService()
+}
 
 public actor DataService: DataServiceProtocol {
     public init() {}
