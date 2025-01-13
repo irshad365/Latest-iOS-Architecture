@@ -9,10 +9,10 @@ import SwiftUI
 import Core
 
 public struct PeopleView: View {
-    @State private var viewModel: PersonViewModel
+    @State private var viewModel: PeopleViewModel
     
     public init(dataService: DataServiceProtocol) {
-        _viewModel = State(wrappedValue: PersonViewModel(service: dataService))
+        _viewModel = State(wrappedValue: PeopleViewModel(service: dataService))
     }
     
     @State private var searchtext: String = ""

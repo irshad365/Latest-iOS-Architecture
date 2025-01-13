@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable @MainActor
-public class PersonViewModel {
+public class PeopleViewModel {
     var loading: Bool
     var people: [Person] = []
     var error: String?
