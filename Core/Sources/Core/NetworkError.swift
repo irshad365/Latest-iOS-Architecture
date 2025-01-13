@@ -9,11 +9,14 @@ import Foundation
 
 public enum NetworkError: Error, LocalizedError {
     case invalidUrl
+    case invalidPath
     
     public var errorDescription: String? {
         switch self {
         case .invalidUrl:
             return "Invalid URL String"
+        case .invalidPath:
+            return "Invalid File Path"
         }
     }
 }

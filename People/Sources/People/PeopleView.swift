@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Core
 
 public struct PeopleView: View {
     @State private var viewModel: PersonViewModel
@@ -61,13 +62,5 @@ public struct PeopleView: View {
 }
 
 #Preview {
-    actor MockDataService: DataServiceProtocol {
-        func getPersonList() async throws -> [Person] {
-            return [
-                Person(id: UUID(), name: "John", age: 30),
-                Person(id: UUID(), name: "Doe", age: 30)
-            ]
-        }
-    }
-    return PeopleView(dataService: MockDataService())
+     PeopleView(dataService: MockDataService())
 }

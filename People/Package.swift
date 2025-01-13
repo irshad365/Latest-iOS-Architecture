@@ -9,16 +9,23 @@ let package = Package(
         .iOS(.v17),
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "People",
             targets: ["People"]),
     ],
+    dependencies: [
+        .package(path: "../Core")
+    ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "People"),
+            name: "People",
+            dependencies: [
+                .product(name: "Core", package: "Core")
+            ],
+            resources: [
+                .process("Mock/people.json"),
+            ]
+        ),
         .testTarget(
             name: "PeopleTests",
             dependencies: ["People"]

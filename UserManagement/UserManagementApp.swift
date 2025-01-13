@@ -14,6 +14,7 @@ struct UserManagementApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.dataService, DataService())
+//                .environment(\.dataService, MockDataService())
         }
     }
 }
