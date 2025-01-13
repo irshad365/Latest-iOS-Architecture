@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import People
 
 @main
 struct UserManagementApp: App {

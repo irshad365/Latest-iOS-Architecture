@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CDC2F1C42D356F9C002384AC /* People in Frameworks */ = {isa = PBXBuildFile; productRef = CDC2F1C32D356F9C002384AC /* People */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		CD27D5752D3483CD00DFCC11 /* UserManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UserManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDC2F1C42D356F9C002384AC /* People in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33,6 +38,7 @@
 			isa = PBXGroup;
 			children = (
 				CD27D5772D3483CD00DFCC11 /* UserManagement */,
+				CDC2F1C22D356F9C002384AC /* Frameworks */,
 				CD27D5762D3483CD00DFCC11 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +49,13 @@
 				CD27D5752D3483CD00DFCC11 /* UserManagement.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CDC2F1C22D356F9C002384AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -65,6 +78,7 @@
 			);
 			name = UserManagement;
 			packageProductDependencies = (
+				CDC2F1C32D356F9C002384AC /* People */,
 			);
 			productName = UserManagement;
 			productReference = CD27D5752D3483CD00DFCC11 /* UserManagement.app */;
@@ -262,7 +276,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
@@ -302,7 +316,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
@@ -341,6 +355,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CDC2F1C32D356F9C002384AC /* People */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = People;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CD27D56D2D3483CD00DFCC11 /* Project object */;
 }
