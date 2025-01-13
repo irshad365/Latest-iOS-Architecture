@@ -15,7 +15,6 @@ struct UserManagementApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [Person.self])
     }
 }
 
@@ -23,6 +22,7 @@ struct ContentView: View {
 
     var body: some View {
         PeopleView()
+            .modelContainer(for: [Person.self])
             .environment(\.dataService, DataService())
 //            .environment(\.dataService, MockDataService())
     }

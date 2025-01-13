@@ -102,5 +102,6 @@ struct ListView: View {
 
 #Preview {
     PeopleView()
+        .modelContainer(for: [Person.self])
         .environment(\.dataService, MockDataService())
 }
