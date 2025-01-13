@@ -7,12 +7,12 @@
 
 import Foundation
 
-@MainActor
-public class PersonViewModel: ObservableObject {
-    @Published var loading: Bool
-    @Published var people: [Person] = []
-    @Published var error: String?
-    @Published var filteredPeople: [Person] = []
+@Observable @MainActor
+public class PersonViewModel {
+    var loading: Bool
+    var people: [Person] = []
+    var error: String?
+    var filteredPeople: [Person] = []
 
     private let service: DataServiceProtocol
     public init(service: DataServiceProtocol) {
@@ -25,8 +25,7 @@ public class PersonViewModel: ObservableObject {
     func loadPeople() async {
         loading = true
         do {
-            let data = try await service.getPersonList()
-            self.people = data
+            self.people = try await service.getPersonList()
             self.filteredPeople = self.people
             self.error = nil
         } catch {
@@ -42,4 +41,5 @@ public class PersonViewModel: ObservableObject {
         }
         self.filteredPeople = self.people.filter{ $0.name.contains(value)}
     }
+    
 }

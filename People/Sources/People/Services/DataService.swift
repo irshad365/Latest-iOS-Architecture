@@ -11,8 +11,7 @@ public actor DataService: DataServiceProtocol {
     public init() {}
     
     public func getPersonList() async throws -> [Person] {
-
-        guard let url = URL(string: "https://run.mocky.io/v3/f739147a-168f-42a2-ac6d-668bcbbb20a2") else {
+        guard let url = URL(string: "https://run.mocky.io/v3/da80f53d-f4be-4b52-a3b1-645f09203a62") else {
             throw NetworkError.invalidUrl
         }
         let (data, _) = try await URLSession.shared.data(from: url)

@@ -10,10 +10,12 @@ import People
 
 @main
 struct UserManagementApp: App {
+    @State private var viewmodel = PersonViewModel(service: DataService())
+
     var body: some Scene {
         WindowGroup {
-            let viewmodel = PersonViewModel(service: DataService())
-            PeopleView(viewmodel: viewmodel)
+            PeopleView()
+                .environment(viewmodel)
         }
     }
 }

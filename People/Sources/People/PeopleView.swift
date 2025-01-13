@@ -8,11 +8,9 @@
 import SwiftUI
 
 public struct PeopleView: View {
-    @StateObject private var viewModel: PersonViewModel
+    @Environment(PersonViewModel.self) private var viewModel
     @State private var searchtext: String = ""
-    public init(viewmodel: PersonViewModel) {
-        _viewModel = StateObject(wrappedValue: viewmodel)
-    }
+    public init() {}
     
     public var body: some View {
         NavigationView {
@@ -66,5 +64,6 @@ actor MockDataService: DataServiceProtocol {
 
 #Preview {
     let viewmodel = PersonViewModel(service: MockDataService())
-    PeopleView(viewmodel: viewmodel)
+    PeopleView()
+        .environment(viewmodel)
 }
