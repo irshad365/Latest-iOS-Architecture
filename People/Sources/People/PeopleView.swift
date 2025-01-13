@@ -7,51 +7,71 @@
 
 import SwiftUI
 import Core
+import SwiftData
 
 public struct PeopleView: View {
-    @State private var viewModel: PeopleViewModel
+    @Environment(\.dataService) private var service
+    @Environment(\.modelContext) private var modelContext
+    @State private var loading: Bool = false
+    @State private var error: String? = nil
+    @State private var searchtext: String = ""
+
+    public init() {}
     
-    public init(dataService: DataServiceProtocol) {
-        _viewModel = State(wrappedValue: PeopleViewModel(service: dataService))
+    func loadPeople() async {
+        loading = true
+        error = nil
+        do {
+            let list = try await service.getPersonList()
+            do {
+                try modelContext.transaction {
+                    for item in list {
+                        modelContext.insert(item)
+                    }
+                    do {
+                        try modelContext.save()
+                    } catch {
+                        self.error = error.localizedDescription
+                    }
+                }
+            } catch {
+                self.error = error.localizedDescription
+            }
+        } catch {
+            self.error = error.localizedDescription
+        }
+        loading = false
     }
     
-    @State private var searchtext: String = ""
     public var body: some View {
         NavigationView {
             content
                 .navigationTitle("Demo")
         }
         .task {
-            await viewModel.loadPeople()
+            await loadPeople()
         }
         .refreshable {
-            await viewModel.loadPeople()
+            await loadPeople()
         }
         .searchable(text: $searchtext)
-        .onChange(of: searchtext) {
-            viewModel.filter(value: searchtext )
-        }
+
     }
     
     var content: some View {
         VStack {
-            if let error = viewModel.error {
+            if let error = error {
                 Text(error)
                 Button("Reload") {
                     Task {
-                        await viewModel.loadPeople()
+                        await loadPeople()
                     }
                 }
             } else {
-                List(viewModel.filteredPeople , id: \.id) { person in
-                    HStack {
-                        Text(person.name)
-                        Text(String(person.age))
-                    }
-                }
+                ListView(searchText: searchtext)
                 .overlay(
                     Group {
-                        if viewModel.loading {
+                        if loading {
                             ProgressView()
                         }
                     }
@@ -61,6 +81,26 @@ public struct PeopleView: View {
     }
 }
 
+struct ListView: View {
+    init(searchText : String) {
+        let predicate = (searchText.isEmpty) ? nil : #Predicate<Person> {$0.name.contains(searchText)}
+        _people = Query(filter: predicate,
+                   sort: [SortDescriptor(\Person.name)])
+    }
+    
+    @Query private var people: [Person]
+
+    var body: some View {
+        List(people , id: \.id) { person in
+            HStack {
+                Text(person.name)
+                Text(String(person.age))
+            }
+        }
+    }
+}
+
 #Preview {
-     PeopleView(dataService: MockDataService())
+    PeopleView()
+        .environment(\.dataService, MockDataService())
 }

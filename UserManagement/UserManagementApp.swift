@@ -7,22 +7,23 @@
 
 import SwiftUI
 import People
+import SwiftData
 
 @main
 struct UserManagementApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.dataService, DataService())
-//                .environment(\.dataService, MockDataService())
         }
+        .modelContainer(for: [Person.self])
     }
 }
 
 struct ContentView: View {
-    @Environment(\.dataService) private var dataService
 
     var body: some View {
-        PeopleView(dataService: dataService)
+        PeopleView()
+            .environment(\.dataService, DataService())
+//            .environment(\.dataService, MockDataService())
     }
 }
