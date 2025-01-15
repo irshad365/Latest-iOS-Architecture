@@ -13,15 +13,15 @@ public class Person: Codable, Identifiable, @unchecked Sendable {
     @Attribute(.unique) public var id: UUID
     public var name: String
     public var age: Int
-    
+
     public init(id: UUID, name: String, age: Int) {
         self.id = id
         self.name = name
         self.age = age
     }
-    
+
     // Codable
-    
+
     enum CodingKeys: CodingKey {
         case name
         case age
@@ -34,7 +34,7 @@ public class Person: Codable, Identifiable, @unchecked Sendable {
         name = try container.decode(String.self, forKey: .name)
         age = try container.decode(Int.self, forKey: .age)
     }
-    
+
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)

@@ -14,7 +14,8 @@ let package = Package(
             targets: ["People"]),
     ],
     dependencies: [
-        .package(path: "../Core")
+        .package(path: "../Core"),
+        .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins", from: "0.58.0")
     ],
     targets: [
         .target(
@@ -24,6 +25,9 @@ let package = Package(
             ],
             resources: [
                 .process("Mock/people.json"),
+            ],
+            plugins: [
+                .plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")
             ]
         ),
         .testTarget(

@@ -17,14 +17,13 @@ struct UserManagementApp: App {
                 .environment(\.dataService, DataService())
 //                .environment(\.dataService, MockDataService())
         }
-        
     }
 }
 
 struct ContentView: View {
     @Environment(\.dataService) private var service
     @Environment(\.modelContext) private var modelContext
-    
+
     var body: some View {
         PeopleView(modelContext: modelContext, service: service)
             .modelContainer(for: [Person.self])

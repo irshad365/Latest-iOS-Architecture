@@ -10,13 +10,15 @@ import Foundation
 public enum NetworkError: Error, LocalizedError {
     case invalidUrl
     case invalidPath
-    
+    case undefined
     public var errorDescription: String? {
         switch self {
         case .invalidUrl:
             return "Invalid URL String"
         case .invalidPath:
             return "Invalid File Path"
+        case .undefined:
+            return "Undefined Error"
         }
     }
 }

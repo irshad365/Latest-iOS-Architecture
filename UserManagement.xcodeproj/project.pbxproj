@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CDC2F1C42D356F9C002384AC /* People in Frameworks */ = {isa = PBXBuildFile; productRef = CDC2F1C32D356F9C002384AC /* People */; };
+		CDD3C00B2D382DAE0007980E /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = CDD3C00A2D382DAE0007980E /* Core */; };
+		CDD3C00E2D382DC70007980E /* People in Frameworks */ = {isa = PBXBuildFile; productRef = CDD3C00D2D382DC70007980E /* People */; };
+		CDD3C0182D382E480007980E /* People in Frameworks */ = {isa = PBXBuildFile; productRef = CDD3C0172D382E480007980E /* People */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +30,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD3C00E2D382DC70007980E /* People in Frameworks */,
 				CDC2F1C42D356F9C002384AC /* People in Frameworks */,
+				CDD3C00B2D382DAE0007980E /* Core in Frameworks */,
+				CDD3C0182D382E480007980E /* People in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +78,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CDD3C0222D3830160007980E /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				CD27D5772D3483CD00DFCC11 /* UserManagement */,
@@ -79,6 +86,9 @@
 			name = UserManagement;
 			packageProductDependencies = (
 				CDC2F1C32D356F9C002384AC /* People */,
+				CDD3C00A2D382DAE0007980E /* Core */,
+				CDD3C00D2D382DC70007980E /* People */,
+				CDD3C0172D382E480007980E /* People */,
 			);
 			productName = UserManagement;
 			productReference = CD27D5752D3483CD00DFCC11 /* UserManagement.app */;
@@ -92,7 +102,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1610;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					CD27D5742D3483CD00DFCC11 = {
 						CreatedOnToolsVersion = 16.1;
@@ -108,6 +118,11 @@
 			);
 			mainGroup = CD27D56C2D3483CD00DFCC11;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				CDD3C0082D382D5B0007980E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+				CDD3C0092D382DAE0007980E /* XCLocalSwiftPackageReference "Core" */,
+				CDD3C00C2D382DC70007980E /* XCLocalSwiftPackageReference "People" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CD27D5762D3483CD00DFCC11 /* Products */;
 			projectDirPath = "";
@@ -137,6 +152,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CDD3C0222D3830160007980E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = CDD3C0212D3830160007980E /* SwiftLintBuildToolPlugin */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CD27D5822D3483CE00DFCC11 /* Debug */ = {
@@ -173,6 +195,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -234,6 +257,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -261,6 +285,7 @@
 				CODE_SIGN_ENTITLEMENTS = UserManagement/UserManagement.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"UserManagement/Preview Content\"";
 				DEVELOPMENT_TEAM = D23GHKB5T9;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -301,6 +326,7 @@
 				CODE_SIGN_ENTITLEMENTS = UserManagement/UserManagement.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"UserManagement/Preview Content\"";
 				DEVELOPMENT_TEAM = D23GHKB5T9;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -356,10 +382,49 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		CDD3C0092D382DAE0007980E /* XCLocalSwiftPackageReference "Core" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Core;
+		};
+		CDD3C00C2D382DC70007980E /* XCLocalSwiftPackageReference "People" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = People;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CDD3C0082D382D5B0007980E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.58.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		CDC2F1C32D356F9C002384AC /* People */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = People;
+		};
+		CDD3C00A2D382DAE0007980E /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+		CDD3C00D2D382DC70007980E /* People */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = People;
+		};
+		CDD3C0172D382E480007980E /* People */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = People;
+		};
+		CDD3C0212D3830160007980E /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDD3C0082D382D5B0007980E /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
