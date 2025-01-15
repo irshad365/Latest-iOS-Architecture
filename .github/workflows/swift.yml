@@ -16,10 +16,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Print current directory
+      run: pwd
     
     - name: Navigate to People
       working-directory: ./People
       run: echo "Moved to People"
+    
+    - name: Print current directory
+      run: pwd
       
     - name: Build
       run: swift build -v
