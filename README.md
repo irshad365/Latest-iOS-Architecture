@@ -10,6 +10,28 @@ This iOS app is structured with a modular architecture and split into multiple S
 - **Dependency Injection**: The project uses dependency injection to manage dependencies between components.
 The project uses a protocol `DataServiceProtocol` to define the interface for data services. The `DataService` class implements this protocol to fetch data from a remote service, while the `MockDataService` class provides mock data for testing.
 
+
+- **SwiftData**: Using Query and Modalcontainer to fetch and save data. UI queries data from database.
+```swift
+try modelContext.transaction {
+    for item in list {
+        modelContext.insert(item)
+    }
+    do {
+        try modelContext.save()
+    } catch {
+        self.error = error.localizedDescription
+    }
+}
+....
+init(searchText: String) {
+    let predicate = (searchText.isEmpty) ? nil : #Predicate<Person> {$0.name.contains(searchText)}
+        _people = Query(filter: predicate,
+        sort: [SortDescriptor(\Person.name)])
+}
+@Query private var people: [Person]
+```
+
 - **Protocol**: A protocol is defined to outline the required methods for data services.
 
 ```swift
@@ -18,15 +40,20 @@ protocol DataServiceProtocol {
 }
 ```
 
-- **Mock Data Service**: A mock data service is implemented to simulate data operations for testing purposes.
+- **Mock Data Service**: A mock data service is implemented to simulate data operations for testing purposes. which uses `Core` package to load a json file
 
 ```swift
-actor MockDataService: DataServiceProtocol {
-    func getPersonList() async throws -> [Person] {
-        return [
-            Person(id: UUID(), name: "John", age: 30),
-            Person(id: UUID(), name: "Doe", age: 30)
-        ]
+public actor MockDataService: DataServiceProtocol {
+    var throwError: Bool
+    public init(throwError: Bool = false) {
+        self.throwError = throwError
+    }
+
+    public func getPersonList() async throws -> [Person] {
+        guard throwError == false else {
+            throw CustomError.undefined
+        }
+        return try Core.FileManager.contents(of: "people", in: Bundle.module) as [Person]
     }
 }
 ```
@@ -34,10 +61,12 @@ actor MockDataService: DataServiceProtocol {
 - **ViewModel**: The PersonViewModel class uses the data service to load and filter user data.
 
 ```swift
-@MainActor
-class PersonViewModel: ObservableObject {
-    private let service: DataServiceProtocol
-    // Implementation of view model
+extension PeopleView {
+    @Observable @MainActor
+    class ViewModel {
+        private let service: DataServiceProtocol
+        // Implementation of view model
+    }
 }
 ```
 
