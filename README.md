@@ -18,15 +18,20 @@ protocol DataServiceProtocol {
 }
 ```
 
-- **Mock Data Service**: A mock data service is implemented to simulate data operations for testing purposes.
+- **Mock Data Service**: A mock data service is implemented to simulate data operations for testing purposes. which uses `Core` package to load a json file
 
 ```swift
-actor MockDataService: DataServiceProtocol {
-    func getPersonList() async throws -> [Person] {
-        return [
-            Person(id: UUID(), name: "John", age: 30),
-            Person(id: UUID(), name: "Doe", age: 30)
-        ]
+public actor MockDataService: DataServiceProtocol {
+    var throwError: Bool
+    public init(throwError: Bool = false) {
+        self.throwError = throwError
+    }
+
+    public func getPersonList() async throws -> [Person] {
+        guard throwError == false else {
+            throw CustomError.undefined
+        }
+        return try Core.FileManager.contents(of: "people", in: Bundle.module) as [Person]
     }
 }
 ```
@@ -34,10 +39,12 @@ actor MockDataService: DataServiceProtocol {
 - **ViewModel**: The PersonViewModel class uses the data service to load and filter user data.
 
 ```swift
-@MainActor
-class PersonViewModel: ObservableObject {
-    private let service: DataServiceProtocol
-    // Implementation of view model
+extension PeopleView {
+    @Observable @MainActor
+    class ViewModel {
+        private let service: DataServiceProtocol
+        // Implementation of view model
+    }
 }
 ```
 
