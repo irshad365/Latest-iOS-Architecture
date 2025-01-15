@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum NetworkError: Error, LocalizedError {
+public enum CustomError: Error, LocalizedError {
     case invalidUrl
     case invalidPath
     case undefined

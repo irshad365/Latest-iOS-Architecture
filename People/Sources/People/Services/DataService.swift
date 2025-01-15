@@ -22,9 +22,15 @@ public actor DataService: DataServiceProtocol {
 }
 
 public actor MockDataService: DataServiceProtocol {
-    public init() {}
+    var throwError: Bool
+    public init(throwError: Bool = false) {
+        self.throwError = throwError
+    }
 
     public func getPersonList() async throws -> [Person] {
-        try Core.FileManager.contents(of: "people", in: Bundle.module)
+        guard throwError == false else {
+            throw CustomError.undefined
+        }
+        return try Core.FileManager.contents(of: "people", in: Bundle.module) as [Person]
     }
 }

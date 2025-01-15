@@ -13,7 +13,7 @@ public class NetworkSession: @unchecked Sendable {
     
     public func data<T: Codable>(from url: String) async throws -> T {
         guard let url = URL(string: url) else {
-            throw NetworkError.invalidUrl
+            throw CustomError.invalidUrl
         }
         let (data, _) = try await URLSession.shared.data(from: url)
         return try JSONDecoder().decode(T.self, from: data)

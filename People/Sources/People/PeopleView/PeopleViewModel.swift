@@ -13,7 +13,6 @@ extension PeopleView {
     class ViewModel {
         var loading: Bool = false
         var error: String?
-        var people: [Person] = []
 
         private let service: DataServiceProtocol
         private let modelContext: ModelContext
