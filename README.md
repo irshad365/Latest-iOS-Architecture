@@ -1,6 +1,9 @@
 # User Management Project
 
-This project is designed to manage user data efficiently. It utilizes dependency injection to ensure that components are loosely coupled and easily testable.
+This iOS app is structured with a modular architecture and split into multiple Swift packages for better scalability and maintainability. It utilizes dependency injection to ensure that components are loosely coupled and easily testable.
+
+<img width="737" alt="sc" src="https://github.com/user-attachments/assets/824e2c43-eb6c-4ff0-89ae-f43a33639d3a" />
+
 
 ## Key Features
 
