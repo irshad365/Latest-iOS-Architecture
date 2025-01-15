@@ -10,6 +10,28 @@ This iOS app is structured with a modular architecture and split into multiple S
 - **Dependency Injection**: The project uses dependency injection to manage dependencies between components.
 The project uses a protocol `DataServiceProtocol` to define the interface for data services. The `DataService` class implements this protocol to fetch data from a remote service, while the `MockDataService` class provides mock data for testing.
 
+
+- **SwiftData**: Using Query and Modalcontainer to fetch and save data. UI queries data from database.
+```swift
+try modelContext.transaction {
+    for item in list {
+        modelContext.insert(item)
+    }
+    do {
+        try modelContext.save()
+    } catch {
+        self.error = error.localizedDescription
+    }
+}
+....
+init(searchText: String) {
+    let predicate = (searchText.isEmpty) ? nil : #Predicate<Person> {$0.name.contains(searchText)}
+        _people = Query(filter: predicate,
+        sort: [SortDescriptor(\Person.name)])
+}
+@Query private var people: [Person]
+```
+
 - **Protocol**: A protocol is defined to outline the required methods for data services.
 
 ```swift
