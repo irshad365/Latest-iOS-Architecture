@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Navigate to Subfolder
+      working-directory: ./People 
     - name: Build
       run: swift build -v
     - name: Run tests
