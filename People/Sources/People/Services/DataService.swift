@@ -17,7 +17,7 @@ public actor DataService: DataServiceProtocol {
     public init() {}
     
     public func getPersonList() async throws -> [Person] {
-        try await NetworkSession.shared.data(from: "https://run.mocky.io/v3/37065906-898e-479f-9ab3-a7971558448d")
+        try await NetworkSession.shared.data(from: "https://run.mocky.io/v3/d1df7e14-7ab8-4fff-aa6d-ea0d5ba4c83a")
     }
 }
 

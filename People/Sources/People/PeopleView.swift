@@ -9,14 +9,19 @@ import SwiftUI
 import Core
 import SwiftData
 
-public struct PeopleView: View {
-    @Environment(\.dataService) private var service
-    @Environment(\.modelContext) private var modelContext
-    @State private var loading: Bool = false
-    @State private var error: String? = nil
-    @State private var searchtext: String = ""
-
-    public init() {}
+@Observable @MainActor
+class PeopleViewModel {
+    var loading: Bool = false
+    var error: String? = nil
+    var people: [Person] = []
+    
+    private let service: DataServiceProtocol
+    private let modelContext: ModelContext
+    
+    init(modelContext: ModelContext, service: DataServiceProtocol) {
+        self.modelContext = modelContext
+        self.service = service
+    }
     
     func loadPeople() async {
         loading = true
@@ -43,40 +48,51 @@ public struct PeopleView: View {
         loading = false
     }
     
+}
+
+public struct PeopleView: View {
+    @State private var searchtext: String = ""
+    
+    @State private var viewModel: PeopleViewModel
+    public init(modelContext: ModelContext, service: DataServiceProtocol) {
+        let viewModel = PeopleViewModel(modelContext: modelContext, service: service)
+        _viewModel = State(initialValue: viewModel)
+    }
+    
     public var body: some View {
         NavigationView {
             content
                 .navigationTitle("Demo")
         }
         .task {
-            await loadPeople()
+            await viewModel.loadPeople()
         }
         .refreshable {
-            await loadPeople()
+            await viewModel.loadPeople()
         }
         .searchable(text: $searchtext)
-
+        
     }
     
     var content: some View {
         VStack {
-            if let error = error {
+            if let error = viewModel.error {
                 Text(error)
                 Button("Reload") {
                     Task {
-                        await loadPeople()
+                        await viewModel.loadPeople()
                     }
                 }
-            } else {
-                ListView(searchText: searchtext)
+            }
+            ListView(searchText: searchtext)
                 .overlay(
                     Group {
-                        if loading {
+                        if viewModel.loading {
                             ProgressView()
                         }
                     }
                 )
-            }
+            
         }
     }
 }
@@ -85,11 +101,11 @@ struct ListView: View {
     init(searchText : String) {
         let predicate = (searchText.isEmpty) ? nil : #Predicate<Person> {$0.name.contains(searchText)}
         _people = Query(filter: predicate,
-                   sort: [SortDescriptor(\Person.name)])
+                        sort: [SortDescriptor(\Person.name)])
     }
     
     @Query private var people: [Person]
-
+    
     var body: some View {
         List(people , id: \.id) { person in
             HStack {
@@ -100,8 +116,7 @@ struct ListView: View {
     }
 }
 
-#Preview {
-    PeopleView()
-        .modelContainer(for: [Person.self])
-        .environment(\.dataService, MockDataService())
-}
+//#Preview {
+//    PeopleView(modelContext: <#ModelContext#>, service: MockDataService())
+//        .modelContainer(for: [Person.self])
+//}
