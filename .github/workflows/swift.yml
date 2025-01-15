@@ -16,9 +16,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Navigate to Subfolder
-      working-directory: ./People 
+    
+    - name: Navigate to People
+      working-directory: ./People
+      run: echo "Moved to People"
+      
     - name: Build
       run: swift build -v
+      
     - name: Run tests
       run: swift test -v
