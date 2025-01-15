@@ -15,9 +15,9 @@ extension PeopleView {
             _people = Query(filter: predicate,
                             sort: [SortDescriptor(\Person.name)])
         }
-
+        
         @Query private var people: [Person]
-
+        
         var body: some View {
             List(people, id: \.id) { person in
                 HStack {
@@ -28,3 +28,8 @@ extension PeopleView {
         }
     }
 }
+
+ #Preview {
+     PeopleView.ListView(searchText: "")
+         .modelContainer(for: [Person.self])
+ }

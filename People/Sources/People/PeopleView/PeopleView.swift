@@ -11,12 +11,12 @@ import SwiftData
 public struct PeopleView: View {
     @State private var searchtext: String = ""
     @State private var viewModel: ViewModel
-
+    
     public init(modelContext: ModelContext, service: DataServiceProtocol) {
         let viewModel = ViewModel(modelContext: modelContext, service: service)
         _viewModel = State(initialValue: viewModel)
     }
-
+    
     public var body: some View {
         NavigationView {
             content
@@ -29,9 +29,9 @@ public struct PeopleView: View {
             await viewModel.loadPeople()
         }
         .searchable(text: $searchtext)
-
+        
     }
-
+    
     var content: some View {
         VStack {
             if let error = viewModel.error {
@@ -54,7 +54,9 @@ public struct PeopleView: View {
     }
 }
 
-// #Preview {
-//    PeopleView(modelContext: <#ModelContext#>, service: MockDataService())
-//        .modelContainer(for: [Person.self])
-// }
+#Preview {
+    @Previewable @Environment(\.modelContext)  var modelContext
+    
+    PeopleView(modelContext: modelContext, service: MockDataService())
+        .modelContainer(for: [Person.self])
+}
