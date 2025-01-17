@@ -7,7 +7,6 @@ let package = Package(
     name: "People",
     platforms: [
         .iOS(.v17),
-        .macOS(.v12)
     ],
     products: [
         .library(
@@ -22,8 +21,7 @@ let package = Package(
         .target(
             name: "People",
             dependencies: [
-                .product(name: "Core", package: "Core"),
-                .product(name: "SwiftUICore", package: "SwiftUICore")
+                .product(name: "Core", package: "Core")
             ],
             resources: [
                 .process("Mock/people.json"),
