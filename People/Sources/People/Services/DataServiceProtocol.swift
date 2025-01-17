@@ -7,6 +7,6 @@
 
 import Foundation
 
-public protocol DataServiceProtocol: Sendable {
+public protocol DataServiceProtocol {
     func getPersonList() async throws -> [Person]
 }

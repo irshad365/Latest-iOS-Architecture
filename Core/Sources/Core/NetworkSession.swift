@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class NetworkSession: @unchecked Sendable {
+public class NetworkSession {
     private init() {}
     public static let shared = NetworkSession()
     

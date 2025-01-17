@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-public class Person: Codable, Identifiable, @unchecked Sendable {
+public class Person: Codable, Identifiable {
     @Attribute(.unique) public var id: UUID
     public var name: String
     public var age: Int

@@ -18,39 +18,33 @@ public struct PeopleView: View {
     }
     
     public var body: some View {
-        NavigationView {
+        NavigationStack {
             content
                 .navigationTitle("Demo")
-        }
-        .task {
-            await viewModel.loadPeople()
+                .navigationBarTitleDisplayMode(.inline)
+                .searchable(text: $searchtext)
         }
         .refreshable {
             await viewModel.loadPeople()
         }
-        .searchable(text: $searchtext)
-        
+        .task {
+            await viewModel.loadPeople()
+        }
     }
     
     var content: some View {
-        VStack {
-            if let error = viewModel.error {
-                Text(error)
-                Button("Reload") {
-                    Task {
-                        await viewModel.loadPeople()
-                    }
+        ListView(searchText: searchtext, error: viewModel.error) {
+            Task {
+                await viewModel.loadPeople()
+            }
+        }
+        .overlay(
+            Group {
+                if viewModel.loading {
+                    ProgressView()
                 }
             }
-            ListView(searchText: searchtext)
-                .overlay(
-                    Group {
-                        if viewModel.loading {
-                            ProgressView()
-                        }
-                    }
-                )
-        }
+        )
     }
 }
 
